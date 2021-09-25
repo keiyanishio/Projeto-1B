@@ -31,6 +31,7 @@ def index(request):
 def deletar(request, ide):
     note = Note()
     note.id = ide
+    Tag.objects.filter(note__id=ide).delete()
     note.delete()
     return redirect('index')
 
@@ -50,6 +51,7 @@ def listatags(request):
     all_tag = Tag.objects.all()
     print(all_tag)
     return render(request, 'notes/listatags.html', {'notes': all_tag})
+
 
 
 #Note.objects.create(title=title, content=content)
