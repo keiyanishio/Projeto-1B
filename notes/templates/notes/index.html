@@ -22,6 +22,12 @@
       placeholder="Digite o conteúdo..."
     ></textarea>
 
+    <textarea
+      class="autoresize"
+      name="tag"
+      placeholder="Digite a tag..."
+    ></textarea>
+
     <button class="btn" type="submit">Criar</button>
         
 </form>
@@ -31,17 +37,25 @@
     <div class="card">
       <h3 class="card-title">{{note.title}} <a class = "edit" href="editar/{{note.id}}">edit</a> 
       <a class = "del" href="deletar/{{note.id}}">x</a></h3>
-      
     
       <div class="card-content">
         <p>
             {{note.content}}
         </p>
       </div>
+      
+      <div class = "tag">
+        <p>
+            {{note.tags.texto}}
+        </p>
+      </div>
     </div>
   {% endfor %}
 </div>
 
+<div class = "botao-tag">
+  <a class = "lista-tag" href="tags">Lista de tags</a>
+</div>
 
 </main>
 

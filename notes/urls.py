@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('deletar/<int:ide>', views.deletar, name='deletar'),
     path('editar/<int:ide>', views.editar, name='editar'),
+    path('tags', views.listatags, name ='tags'),
 ]
