@@ -10,17 +10,29 @@ def index(request):
         lista = Tag.objects.filter(texto=tag_texto)
 
         note = Note()
+        tag = Tag()
 
-        if len(lista) > 0:
+        if tag_texto == "":
+            note.title = title
+            note.content = content
+            note.save()
+            Tag.objects.filter(texto=tag_texto).delete()
+
+
+
+        elif len(lista) > 0:
             tag = lista[0]
+            note.title = title
+            note.content = content
+            note.tags = tag
+            note.save()
         else:
-            tag = Tag()
             tag.texto = tag_texto
             tag.save()
-        note.title = title
-        note.content = content
-        note.tags = tag
-        note.save()
+            note.title = title
+            note.content = content
+            note.tags = tag
+            note.save()
 
         
         return redirect('index')
@@ -37,7 +49,6 @@ def deletar(request, ide):
 
 def editar(request, ide):
     nota = Note.objects.filter(id=ide)
-    print(nota)
     primeiro = nota[0]
     if request.method == 'POST':
         title = request.POST.get('titulo')
@@ -49,7 +60,6 @@ def editar(request, ide):
 def listatags(request):
     tag = Tag()
     all_tag = Tag.objects.all()
-    print(all_tag)
     return render(request, 'notes/listatags.html', {'notes': all_tag})
 
 
